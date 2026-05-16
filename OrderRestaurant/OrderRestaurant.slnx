@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="OrderRestaurantAPI/OrderRestaurantAPI.csproj" />
+  <Project Path="OrderRestaurantWebUI/OrderRestaurantWebUI.csproj" />
+</Solution>
