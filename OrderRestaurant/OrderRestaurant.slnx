@@ -1,4 +1,7 @@
 <Solution>
+  <Project Path="OrderRestaurant.BusinessLayer/OrderRestaurant.BusinessLayer.csproj" Id="ae3cada9-f89d-4714-b4c6-f04ccdf2efee" />
+  <Project Path="OrderRestaurant.DataAccessLayer/OrderRestaurant.DataAccessLayer.csproj" Id="31053a69-baf1-486f-ba6c-2c279ec611b2" />
+  <Project Path="OrderRestaurant.DtoLayer/OrderRestaurant.DtoLayer.csproj" Id="72d68f4e-8abe-40df-a157-1b3dac7484de" />
   <Project Path="OrderRestaurant.EntityLayer/OrderRestaurant.EntityLayer.csproj" Id="b8f5972a-2135-4fef-8608-6b6d4db82841" />
   <Project Path="OrderRestaurantAPI/OrderRestaurantAPI.csproj" />
   <Project Path="OrderRestaurantWebUI/OrderRestaurantWebUI.csproj" />

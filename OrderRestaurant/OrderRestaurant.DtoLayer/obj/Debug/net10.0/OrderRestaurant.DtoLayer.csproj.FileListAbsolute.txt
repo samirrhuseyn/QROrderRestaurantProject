@@ -1,0 +1,12 @@
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\bin\Debug\net10.0\OrderRestaurant.DtoLayer.deps.json
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\bin\Debug\net10.0\OrderRestaurant.DtoLayer.dll
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\bin\Debug\net10.0\OrderRestaurant.DtoLayer.pdb
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\OrderRestaurant.DtoLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\OrderRestaurant.DtoLayer.AssemblyInfoInputs.cache
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\OrderRestaurant.DtoLayer.AssemblyInfo.cs
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\OrderRestaurant.DtoLayer.csproj.CoreCompileInputs.cache
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\OrderRestaurant.DtoLayer.sourcelink.json
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\OrderRestaurant.DtoLayer.dll
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\refint\OrderRestaurant.DtoLayer.dll
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\OrderRestaurant.DtoLayer.pdb
+D:\My Projects\QROrderRestaurantProject\OrderRestaurant\OrderRestaurant.DtoLayer\obj\Debug\net10.0\ref\OrderRestaurant.DtoLayer.dll
