@@ -1,4 +1,4 @@
-﻿namespace OrderRestaurantAPI.DAL.Entities
+﻿namespace OrderRestaueant.EntityLayer.Entities
 {
     public class Product
     {

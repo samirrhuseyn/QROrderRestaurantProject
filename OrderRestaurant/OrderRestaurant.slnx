@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="OrderRestaurant.EntityLayer/OrderRestaurant.EntityLayer.csproj" Id="b8f5972a-2135-4fef-8608-6b6d4db82841" />
   <Project Path="OrderRestaurantAPI/OrderRestaurantAPI.csproj" />
   <Project Path="OrderRestaurantWebUI/OrderRestaurantWebUI.csproj" />
 </Solution>
