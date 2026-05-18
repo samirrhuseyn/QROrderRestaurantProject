@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrderRestaurant.DtoLayer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1179b2e4654f97a5aef6a6647c846dd4a08f5cdf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4db4b290b15c5115d488e2c89cf99a7c0f69913b")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrderRestaurant.DtoLayer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrderRestaurant.DtoLayer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

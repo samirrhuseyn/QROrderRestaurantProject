@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OrderRestaurant.DtoLayer.FeatureDto
 {
-    public class CreateFeatueDto
+    public class CreateFeatureDto
     {
         public string FeatureTitle { get; set; }
         public string FeatureDescription { get; set; }
