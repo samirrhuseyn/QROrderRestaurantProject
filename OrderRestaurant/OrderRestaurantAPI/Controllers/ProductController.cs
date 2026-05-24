@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderRestaueant.EntityLayer.Entities;
 using OrderRestaurant.BusinessLayer.Abstract;
+using OrderRestaurant.DataAccessLayer.Concrete;
 using OrderRestaurant.DtoLayer.ProductDto;
 
 namespace OrderRestaurantAPI.Controllers
@@ -11,17 +14,36 @@ namespace OrderRestaurantAPI.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult ProductList()
         {
-            var values = _productService.TGetListAll();
+            var values = _mapper.Map<List<ResultProductDto>>(_productService.TGetListAll());
             return Ok(values);
+        }
+
+        [HttpGet("ProductListWithCategory")]
+        public IActionResult ProductListWithCategory()
+        {
+            var context = new OrderRestaurantContext();
+            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory
+            {
+                ProductId = y.ProductId,
+                ProductName = y.ProductName,
+                ImageURL = y.ImageURL,
+                IsActive = y.IsActive,
+                CategoryName = y.Category.CategoryName,
+                ProductDescription = y.ProductDescription,
+                ProductPrice = y.ProductPrice
+            });
+            return Ok(values.ToList());
         }
 
         [HttpPost]
