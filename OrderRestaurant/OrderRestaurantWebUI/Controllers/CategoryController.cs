@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OrderRestaurantWebUI.Dtos.CategoryDtos;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OrderRestaurantWebUI.Controllers
@@ -23,6 +24,27 @@ namespace OrderRestaurantWebUI.Controllers
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
                 return View(values);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateCategory() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
+        {
+            createCategoryDto.IsActive = true;
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createCategoryDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:44382/api/Category", stringContent);
+            if (responseMessage.IsSuccessStatusCode) 
+            {
+                return RedirectToAction("Index");
             }
             return View();
         }
