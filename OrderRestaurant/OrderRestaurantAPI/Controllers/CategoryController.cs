@@ -36,7 +36,7 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Created successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
             var value = _categoryService.TGetById(id);
@@ -57,7 +57,7 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Updated successfully!");
         }
 
-        [HttpGet("GetCategory")]
+        [HttpGet("{id}")]
         public IActionResult GetCategory(int id)
         {
             var value = _categoryService.TGetById(id);

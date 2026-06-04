@@ -1,14 +1,15 @@
-﻿@model List<OrderRestaurantWebUI.Dtos.CategoryDtos.ResultCategoryDto>
+﻿@model IPagedList<OrderRestaurantWebUI.Dtos.CategoryDtos.ResultCategoryDto>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
 @{
     ViewData["Title"] = "Categories";
     ViewData["Link"] = "/Category/CreateCategory";
     ViewData["ActiveC"] = "active";
     Layout = "~/Views/AdminLayout/Index.cshtml";
-    int count = 1;
+    int count = (Model.PageNumber - 1) * Model.PageSize + 1;
 }
-
 <div class="card">
-    
+
     <div class="card-body">
         <table class="table table-bordered">
             <thead>
@@ -36,14 +37,26 @@
                             }
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary" title="Update"><i class="la la-edit"></i></a>
-                            <a href="#" class="btn btn-danger" title="Delete"><i class="la la-trash"></i></a>
+                            <a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-primary" title="Update"><i class="la la-edit"></i></a>
+                            <a href="/Category/DeleteCategory/@item.CategoryID" class="btn btn-danger" title="Delete"><i class="la la-trash"></i></a>
                         </td>
                     </tr>
                     count++;
                 }
-            </tbody>
-        </table>
 
+            </tbody>
+
+        </table>
+        <nav>
+            @Html.PagedListPager(
+            Model,
+            page => Url.Action("Index", new { page }),
+                        new PagedListRenderOptions
+                        {
+                            UlElementClasses = new[] { "pagination", "justify-content-center" },
+                            LiElementClasses = new[] { "page-item" },
+                            PageClasses = new[] { "page-link" }
+                        })
+        </nav>
     </div>
 </div>
