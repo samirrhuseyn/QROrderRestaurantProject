@@ -29,11 +29,21 @@
                         <td>
                             @if (item.IsActive == true)
                             {
-                                <a href="#" class="btn btn-success btn-xs">Active</a>
+                                <form asp-action="ChangeIsPassive" method="post">
+                                    <input type="hidden" name="id" value="@item.CategoryID" />
+                                    <button type="submit" class="btn btn-success btn-xs">
+                                        Active
+                                    </button>
+                                </form>
                             }
                             else
                             {
-                                <a href="#" class="btn btn-danger btn-xs">Passive</a>
+                                <form asp-action="ChangeIsActive" method="post">
+                                    <input type="hidden" name="id" value="@item.CategoryID" />
+                                    <button type="submit" class="btn btn-danger btn-xs">
+                                        Passive
+                                    </button>
+                                </form>
                             }
                         </td>
                         <td>

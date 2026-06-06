@@ -89,5 +89,36 @@ namespace OrderRestaurantWebUI.Controllers
             }
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeIsPassive(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            var responseMessage = await client.PutAsync($"https://localhost:44382/api/Category/Passive{id}", null);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeIsActive(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            var responseMessage = await client.PutAsync($"https://localhost:44382/api/Category/Active{id}", null);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
     }
 }

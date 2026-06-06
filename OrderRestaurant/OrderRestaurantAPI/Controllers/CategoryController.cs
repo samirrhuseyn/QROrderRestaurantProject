@@ -12,6 +12,7 @@ namespace OrderRestaurantAPI.Controllers
     {
         private readonly ICategoryService _categoryService;
 
+
         public CategoryController(ICategoryService CategoryService)
         {
             _categoryService = CategoryService;
@@ -62,6 +63,24 @@ namespace OrderRestaurantAPI.Controllers
         {
             var value = _categoryService.TGetById(id);
             return Ok(value);
+        }
+
+        [HttpPut("Passive{id}")]
+        public IActionResult ChangeIsPassive(int id)
+        {
+            var value = _categoryService.TGetById(id);
+            value.IsActive = false;
+            _categoryService.TUpdate(value);
+            return Ok("The situation has changed: Passive!");
+        }
+
+        [HttpPut("Active{id}")]
+        public IActionResult ChangeIsActive(int id)
+        {
+            var value = _categoryService.TGetById(id);
+            value.IsActive = true;
+            _categoryService.TUpdate(value);
+            return Ok("The situation has changed: Active!");
         }
     }
 }
