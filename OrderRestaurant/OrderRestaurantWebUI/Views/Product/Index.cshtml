@@ -1,4 +1,4 @@
-﻿@model IPagedList<OrderRestaurantWebUI.Dtos.ProductDtos.ResultProductDto>
+﻿@model IPagedList<OrderRestaurantWebUI.Dtos.ProductDtos.ResultProductWithCategory>
 @using X.PagedList
 @using X.PagedList.Mvc.Core
 @{
@@ -57,7 +57,7 @@
                                 <a href="/Product/DeleteProduct/@item.ProductId" class="btn btn-danger" title="Delete"><i class="la la-trash"></i></a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-default" title="Details"><i class="la la-info-circle"></i></a>
+                                <a href="/Product/ProductDetails/@item.ProductId" class="btn btn-default" title="Details"><i class="la la-info-circle"></i></a>
                             </td>
                         </tr>
                         count++;

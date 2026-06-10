@@ -11,3 +11,26 @@
 <script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <script src="~/Ready-Bootstrap-Dashboard-master/assets/js/ready.min.js"></script>
 <script src="~/Ready-Bootstrap-Dashboard-master/assets/js/demo.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+
+    ClassicEditor
+    .create(document.querySelector('#editor'), {
+    toolbar: [
+    'heading',
+    '|',
+    'bold',
+    'italic',
+    'link',
+    '|',
+    'bulletedList',
+    'numberedList',
+    '|',
+    'undo',
+    'redo'
+    ]
+    })
+    .catch(error => {
+    console.error(error);
+    });
+</script>

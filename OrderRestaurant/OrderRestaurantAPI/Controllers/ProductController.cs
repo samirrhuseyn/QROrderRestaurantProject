@@ -46,6 +46,29 @@ namespace OrderRestaurantAPI.Controllers
             return Ok(values.ToList());
         }
 
+        [HttpGet("GetProductWithCategory")]
+        public IActionResult GetProductWithCategory(int id)
+        {
+            var context = new OrderRestaurantContext();
+
+            var values = context.Products
+                .Include(x => x.Category)
+                .Where(x => x.ProductId== id)
+                .Select(y => new ResultProductWithCategory
+                {
+                    ProductId = y.ProductId,
+                    ProductName = y.ProductName,
+                    ImageURL = y.ImageURL,
+                    IsActive = y.IsActive,
+                    CategoryName = y.Category.CategoryName,
+                    ProductDescription = y.ProductDescription,
+                    ProductPrice = y.ProductPrice
+                })
+                .FirstOrDefault();
+
+            return Ok(values);
+        }
+
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
@@ -55,7 +78,8 @@ namespace OrderRestaurantAPI.Controllers
                 IsActive = true,
                 ProductDescription = createProductDto.ProductDescription,
                 ProductPrice = createProductDto.ProductPrice,
-                ImageURL = createProductDto.ImageURL
+                ImageURL = createProductDto.ImageURL,
+                CategoryId = createProductDto.CategoryId
             };
             _productService.TAdd(product);
             return Ok("Created successfully!");
@@ -79,13 +103,14 @@ namespace OrderRestaurantAPI.Controllers
                 ProductDescription = updateProductDto.ProductDescription,
                 ProductPrice = updateProductDto.ProductPrice,
                 IsActive = true,
-                ImageURL = updateProductDto.ImageURL
+                ImageURL = updateProductDto.ImageURL,
+                CategoryId = updateProductDto.CategoryId
             };
             _productService.TUpdate(product);
             return Ok("Updated successfully!");
         }
 
-        [HttpGet("GetProduct")]
+        [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
             var value = _productService.TGetById(id);

@@ -1,6 +1,6 @@
 ﻿namespace OrderRestaurantWebUI.Dtos.ProductDtos
 {
-    public class ResultProductDto
+    public class ResultProductWithCategory
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
