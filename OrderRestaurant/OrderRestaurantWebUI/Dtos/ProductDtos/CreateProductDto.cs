@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OrderRestaurant.DtoLayer.ProductDto
+﻿namespace OrderRestaurantWebUI.Dtos.ProductDtos
 {
     public class CreateProductDto
     {

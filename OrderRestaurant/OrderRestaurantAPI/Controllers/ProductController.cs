@@ -61,7 +61,7 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Created successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
             var value = _productService.TGetById(id);
@@ -90,6 +90,24 @@ namespace OrderRestaurantAPI.Controllers
         {
             var value = _productService.TGetById(id);
             return Ok(value);
+        }
+
+        [HttpPut("Passive{id}")]
+        public IActionResult ChangeIsPassive(int id)
+        {
+            var value = _productService.TGetById(id);
+            value.IsActive = false;
+            _productService.TUpdate(value);
+            return Ok("The situation has changed: Passive!");
+        }
+
+        [HttpPut("Active{id}")]
+        public IActionResult ChangeIsActive(int id)
+        {
+            var value = _productService.TGetById(id);
+            value.IsActive = true;
+            _productService.TUpdate(value);
+            return Ok("The situation has changed: Active!");
         }
     }
 }

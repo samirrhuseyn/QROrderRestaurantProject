@@ -12,5 +12,6 @@ namespace OrderRestaurant.DtoLayer.ProductDto
         public decimal ProductPrice { get; set; }
         public string ImageURL { get; set; }
         public bool IsActive { get; set; }
+        public int CategoryId { get; set; }
     }
 }

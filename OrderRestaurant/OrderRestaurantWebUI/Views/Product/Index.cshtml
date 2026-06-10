@@ -1,6 +1,82 @@
-﻿
+﻿@model IPagedList<OrderRestaurantWebUI.Dtos.ProductDtos.ResultProductDto>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
 @{
     ViewData["Title"] = "Products";
     ViewData["ActiveP"] = "active";
+    ViewData["Link"] = "/Product/CreateProduct";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = (Model.PageNumber - 1) * Model.PageSize + 1;
 }
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        <th>Product Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>@item.ProductName</td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.ProductPrice ₼</td>
+                            <td>
+                                @if (item.IsActive == true)
+                                {
+                                    <form asp-action="ChangeIsPassive" method="post">
+                                        <input type="hidden" name="id" value="@item.ProductId" />
+                                        <button type="submit" class="btn btn-success btn-xs">
+                                            Active
+                                        </button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="ChangeIsActive" method="post">
+                                        <input type="hidden" name="id" value="@item.ProductId" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            Passive
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                            <td>
+                                <a href="/Product/UpdateProduct/@item.ProductId" class="btn btn-primary" title="Update"><i class="la la-edit"></i></a>
+                                <a href="/Product/DeleteProduct/@item.ProductId" class="btn btn-danger" title="Delete"><i class="la la-trash"></i></a>
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-default" title="Details"><i class="la la-info-circle"></i></a>
+                            </td>
+                        </tr>
+                        count++;
+                    }
+
+
+                </tbody>
+            </table>
+            <nav>
+                @Html.PagedListPager(
+                Model,
+                page => Url.Action("Index", new { page }),
+                                new PagedListRenderOptions
+                                {
+                                    UlElementClasses = new[] { "pagination", "justify-content-center" },
+                                    LiElementClasses = new[] { "page-item" },
+                                    PageClasses = new[] { "page-link" }
+                                })
+            </nav>
+        </div>
+    </div>
+</div>
