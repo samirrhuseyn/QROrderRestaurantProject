@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using OrderRestaurantWebUI.Dtos.CategoryDtos;
@@ -48,9 +49,18 @@ namespace OrderRestaurantWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
+        public async Task<IActionResult> CreateProduct(CreateProductWithImageDto createProductWithImageDto)
         {
-            createProductDto.IsActive = true;
+            string imagePath = await UploadImage(createProductWithImageDto.ImageURL);
+            CreateProductDto createProductDto = new CreateProductDto()
+            {
+                CategoryId = createProductWithImageDto.CategoryId,
+                ImageURL = imagePath,
+                IsActive = true,
+                ProductDescription = createProductWithImageDto.ProductDescription,
+                ProductName = createProductWithImageDto.ProductName,
+                ProductPrice = createProductWithImageDto.ProductPrice
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createProductDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -89,28 +99,58 @@ namespace OrderRestaurantWebUI.Controllers
             ViewBag.dropvalue = dropvalue;
             var client1 = _httpClientFactory.CreateClient();
             var responseMessage1 = await client1.GetAsync($"https://localhost:44382/api/Product/{id}");
+
             if (responseMessage1.IsSuccessStatusCode)
             {
                 var jsonData1 = await responseMessage1.Content.ReadAsStringAsync();
-                var values1 = JsonConvert.DeserializeObject<UpdateProductDto>(jsonData1);
-                return View(values1);
+                var product = JsonConvert.DeserializeObject<UpdateProductDto>(jsonData1);
+                var model = new UpdateProductWithImageDto
+                {
+                    ProductId = product.ProductId,
+                    ProductName = product.ProductName,
+                    ProductDescription = product.ProductDescription,
+                    ProductPrice = product.ProductPrice,
+                    ExistingImageUrl = product.ImageURL,
+                    IsActive = product.IsActive,
+                    CategoryId = product.CategoryId
+                };
+                return View(model);
             }
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
+        public async Task<IActionResult> UpdateProduct(UpdateProductWithImageDto dto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateProductDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:44382/api/Product/", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            string imagePath = dto.ExistingImageUrl;
+
+            if (dto.ImageURL != null)
             {
+                imagePath = await UploadImage(dto.ImageURL);
+            }
+
+            UpdateProductDto updateDto = new()
+            {
+                ProductId = dto.ProductId,
+                ProductName = dto.ProductName,
+                ProductDescription = dto.ProductDescription,
+                ProductPrice = dto.ProductPrice,
+                ImageURL = imagePath,
+                CategoryId = dto.CategoryId,
+                IsActive = dto.IsActive
+            };
+
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(updateDto);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync("https://localhost:44382/api/Product/", content);
+
+            if (response.IsSuccessStatusCode)
                 return RedirectToAction("Index");
 
-            }
-            return View();
+            return View(dto);
         }
 
         [HttpGet]
@@ -159,6 +199,34 @@ namespace OrderRestaurantWebUI.Controllers
             }
 
             return View();
+        }
+
+        private async Task<string> UploadImage(IFormFile image)
+        {
+            if (image == null || image.Length == 0)
+                return null;
+
+            string uploadsFolder = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                "images");
+
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            string fileName = Guid.NewGuid().ToString() +
+                              Path.GetExtension(image.FileName);
+
+            string filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await image.CopyToAsync(stream);
+            }
+
+            return "/images/" + fileName;
         }
     }
 }
