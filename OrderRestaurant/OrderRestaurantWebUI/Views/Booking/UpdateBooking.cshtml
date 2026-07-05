@@ -1,0 +1,54 @@
+﻿@model OrderRestaurantWebUI.Dtos.BookingDtos.UpdateBookingDto
+@{
+    ViewData["Title"] = "Update Booking";
+    ViewData["ActiveB"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="card">
+    <form method="post">
+        <div class="card-body col-md-12 pr-4 pl-4">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input asp-for="BookingId" type="hidden" />
+                    <input asp-for="Date" type="hidden" />
+                    <label for="squareInput1">Name</label>
+                    <input asp-for="Name" type="text" id="squareInput1" class="form-control">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="solidSelect">Status</label>
+                    <select asp-for="BookingStatus" class="form-control input-solid" id="solidSelect">
+                        <option>Created</option>
+                        <option>Cancelled</option>
+                        <option>Postponed</option>
+                        <option>Completed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="squareInput1">Phone Number</label>
+                    <input asp-for="PhoneNumber" type="tel" id="squareInput1" class="form-control">
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="wordEditor">Mail</label>
+                    <input asp-for="Mail" type="email" id="squareInput1" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="wordEditor">Person Count</label>
+                    <input asp-for="PersonCount" type="number" id="squareInput1" class="form-control">
+                </div>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-start">
+                <button class="btn btn-success">Save</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

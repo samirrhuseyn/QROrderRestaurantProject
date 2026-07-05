@@ -1,0 +1,80 @@
+﻿@model IPagedList<OrderRestaurantWebUI.Dtos.BookingDtos.ResultBookingDto>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@{
+    ViewData["Title"] = "Bookings";
+    ViewData["Link"] = "/Booking/CreateBooking";
+    ViewData["ActiveB"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = (Model.PageNumber - 1) * Model.PageSize + 1;
+}
+
+<div class="card">
+
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Mail</th>
+                    <th scope="col">Date and time</th>
+                    <th scope="col">Person</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@count</td>
+                        <td>@item.Name</td>
+                        <td><a href="tel:@item.PhoneNumber">@item.PhoneNumber</a></td>
+                        <td><a href="mailto:@item.Mail">@item.Mail</a></td>
+                        <td>@item.Date.ToString("dd/MMMM/yyyy HH:mm")</td>
+                        <td>@item.PersonCount</td>
+                        <td>
+                            @if (item.BookingStatus == "Completed")
+                            {
+                                <span class="btn btn-success">@item.BookingStatus</span>
+                            }
+                            else if (item.BookingStatus == "Cancelled")
+                            {
+                                <span class="btn btn-danger">@item.BookingStatus</span>
+                            }
+                            else if (item.BookingStatus == "Postponed")
+                            {
+                                <span class="btn btn-default">@item.BookingStatus</span>
+                            }
+                            else if (item.BookingStatus == "Created")
+                            {
+                                <span class="btn btn-primary">@item.BookingStatus</span>
+                            }
+                        </td>
+
+                        <td>
+                            <a href="/Booking/UpdateBooking/@item.BookingId" class="btn btn-primary" title="Update"><i class="la la-edit"></i></a>
+                            <a href="/Booking/DeleteBooking/@item.BookingId" class="btn btn-danger" title="Delete"><i class="la la-trash"></i></a>
+                        </td>
+                    </tr>
+                    count++;
+                }
+
+            </tbody>
+
+        </table>
+        <nav>
+            @Html.PagedListPager(
+            Model,
+            page => Url.Action("Index", new { page }),
+                        new PagedListRenderOptions
+                        {
+                            UlElementClasses = new[] { "pagination", "justify-content-center" },
+                            LiElementClasses = new[] { "page-item" },
+                            PageClasses = new[] { "page-link" }
+                        })
+        </nav>
+    </div>
+</div>
