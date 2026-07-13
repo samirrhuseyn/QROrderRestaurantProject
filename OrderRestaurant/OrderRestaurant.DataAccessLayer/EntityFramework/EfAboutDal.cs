@@ -7,8 +7,17 @@ namespace OrderRestaurant.DataAccessLayer.EntityFramework
 {
     public class EfAboutDal : GenericRepository<About>, IAboutDal
     {
+        private readonly OrderRestaurantContext _context;
         public EfAboutDal(OrderRestaurantContext context) : base(context)
         {
+            _context = context;
+        }
+
+        public About GetLastAbout()
+        {
+            return _context.Abouts
+                       .OrderByDescending(x => x.AboutID)
+                       .FirstOrDefault();
         }
     }
 }

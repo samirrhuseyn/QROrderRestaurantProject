@@ -5,7 +5,8 @@ using System.Text;
 
 namespace OrderRestaurant.DataAccessLayer.Abstract
 {
-    public interface IAboutDal:IGenericDal<About>
+    public interface IAboutDal : IGenericDal<About>
     {
+        About GetLastAbout();
     }
 }

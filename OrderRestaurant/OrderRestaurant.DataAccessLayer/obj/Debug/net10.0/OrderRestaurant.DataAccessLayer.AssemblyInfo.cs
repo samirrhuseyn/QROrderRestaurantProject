@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrderRestaurant.DataAccessLayer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f6b05efecb05e1f5414a3d6a648f469b7a5335f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6be0f351b439d784b2aaa998c029554814d2cd3e")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrderRestaurant.DataAccessLayer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrderRestaurant.DataAccessLayer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

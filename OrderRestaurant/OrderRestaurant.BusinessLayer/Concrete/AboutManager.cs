@@ -28,6 +28,11 @@ namespace OrderRestaurant.BusinessLayer.Concrete
             return _aboutDal.GetById(id);
         }
 
+        public About TGetLastAbout()
+        {
+            return _aboutDal.GetLastAbout();
+        }
+
         public List<About> TGetListAll()
         {
             return _aboutDal.GetListAll();

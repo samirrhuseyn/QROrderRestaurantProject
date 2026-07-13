@@ -7,5 +7,6 @@ namespace OrderRestaurant.BusinessLayer.Abstract
 {
     public interface IAboutService : IGenericService<About>
     {
+        About TGetLastAbout();
     }
 }

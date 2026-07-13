@@ -59,10 +59,17 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Updated successfully!");
         }
 
-        [HttpGet("GetAbout")]
+        [HttpGet("{id}")]
         public IActionResult GetAbout(int id)
         {
             var value = _aboutService.TGetById(id);
+            return Ok(value);
+        }
+
+        [HttpGet("GetLastAbout")]
+        public IActionResult GetLastAbout()
+        {
+            var value = _aboutService.TGetLastAbout();
             return Ok(value);
         }
     }
