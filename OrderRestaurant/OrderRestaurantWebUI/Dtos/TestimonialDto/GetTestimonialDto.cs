@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OrderRestaurant.DtoLayer.TestimonialDto
+namespace OrderRestaurantWebUI.Dtos.TestimonialDto
 {
-    public class UpdateTestimonialDto
+    public class GetTestimonialDto
     {
         public int TestimonialId { get; set; }
         public string Name { get; set; }

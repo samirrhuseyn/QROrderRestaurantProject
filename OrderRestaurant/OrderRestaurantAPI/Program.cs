@@ -7,7 +7,9 @@ using OrderRestaurant.DataAccessLayer.EntityFramework;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<OrderRestaurantContext>();
 // Bu kod layihədəki bütün Profile siniflərini avtomatik tapır və DI-a qeyd edir
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddAutoMapper(cfg =>
+{
+}, typeof(Program).Assembly);
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 
