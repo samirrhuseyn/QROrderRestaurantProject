@@ -1,35 +1,50 @@
-﻿@{
+﻿@model IPagedList<OrderRestaurantWebUI.Dtos.DiscountDto.ResultDiscountDto>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@{
     ViewData["ActiveD"] = "active";
     ViewData["Title"] = "Discounts";
-    ViewData["Link"] = "#";
+    ViewData["Link"] = "/Discount/CreateDiscount/";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 <link href="~/ready-bootstrap-dashboard-master/assets/css/stylediscountpage.css" rel="stylesheet" />
 <div class="discount-wrapper">
+    @foreach(var item in Model)
+    {
+        <div class="discount-card">
 
-    <div class="discount-card">
+            <div class="discount-image">
+                <img src="@item.ImageURL" alt="">
+            </div>
 
-        <div class="discount-image">
-            <img src="~/feane-1.0.0/images/o1.jpg" alt="">
+            <div class="discount-content">
+                <h5>@item.DiscountTitle</h5>
+                <p>@Html.Raw(item.DiscountDescription)</p>
+                <p>@item.Amount AZN</p>
+            </div>
+
+            <div class="discount-actions">
+                <a href="/Discount/UpdateDiscount/@item.DiscountId" class="btn btn-info text-white">
+                    <i class="la la-pencil"></i>
+                </a>
+
+                <a href="/Discount/DeleteDiscount/@item.DiscountId" class="btn btn-danger">
+                    <i class="la la-trash"></i>
+                </a>
+            </div>
+
         </div>
-
-        <div class="discount-content">
-            <h3>Title</h3>
-            <p>Description</p>
-        </div>
-
-        <div class="discount-actions">
-            <a href="#" class="btn btn-info text-white">
-                <i class="la la-pencil"></i>
-            </a>
-
-            <a href="#" class="btn btn-danger">
-                <i class="la la-trash"></i>
-            </a>
-        </div>
-
-    </div>
-
+    }
     
-
 </div>
+<nav>
+    @Html.PagedListPager(
+    Model,
+    page => Url.Action("Index", new { page }),
+                    new PagedListRenderOptions
+                    {
+                        UlElementClasses = new[] { "pagination", "justify-content-center" },
+                        LiElementClasses = new[] { "page-item" },
+                        PageClasses = new[] { "page-link" }
+                    })
+</nav>

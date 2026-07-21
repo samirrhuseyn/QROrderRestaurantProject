@@ -1,0 +1,40 @@
+﻿@model OrderRestaurantWebUI.Dtos.DiscountDto.CreateDiscountWithImageDto
+@{
+    ViewData["ActiveD"] = "active";
+    ViewData["Title"] = "Create Discount";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="card">
+    <form method="post" enctype="multipart/form-data">
+        <div class="card-body col-md-12 pr-4 pl-4">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="squareInput1">Image</label>
+                    <input asp-for="ImageURL" type="file" id="squareInput1" class="form-control">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="squareInput1">Title</label>
+                    <input asp-for="DiscountTitle" type="text" id="squareInput1" class="form-control">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="squareInput1">Amount</label>
+                    <input asp-for="Amount" type="text" id="squareInput1" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="form-group col-md-12">
+                    <label for="wordEditor">Description</label>
+                    <textarea asp-for="DiscountDescription" id="editor"></textarea>
+                </div>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-start">
+                <button class="btn btn-success">Save</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

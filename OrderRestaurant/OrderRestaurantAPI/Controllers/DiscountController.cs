@@ -38,7 +38,7 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Created successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteDiscount(int id)
         {
             var value = _discountService.TGetById(id);
@@ -61,7 +61,7 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Updated successfully!");
         }
 
-        [HttpGet("GetDiscount")]
+        [HttpGet("{id}")]
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetById(id);
