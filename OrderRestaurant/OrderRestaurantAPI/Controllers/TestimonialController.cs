@@ -31,7 +31,8 @@ namespace OrderRestaurantAPI.Controllers
             {
                 Name = createTestimonialDto.Name,
                 Comment = createTestimonialDto.Comment,
-                IsActive = true
+                IsActive = true,
+                ImageURL = createTestimonialDto.ImageURL
             };
             _testimonialService.TAdd(testimonial);
             return Ok("Created successfully!");

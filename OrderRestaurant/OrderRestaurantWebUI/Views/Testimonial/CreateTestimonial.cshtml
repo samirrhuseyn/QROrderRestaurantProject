@@ -1,0 +1,64 @@
+﻿@model OrderRestaurantWebUI.Dtos.TestimonialDto.CreateTestimonialDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate us!</title>
+    <link href="~/css/testimonialcreatestyle.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/ready-bootstrap-dashboard-master/assets/img/buta.png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+    <h1></h1>
+
+    <div class="container">
+
+        <div class="left">
+            <form asp-action="CreateTestimonial" asp-controller="Testimonial" method="post" enctype="multipart/form-data">
+                <div class="image-upload">
+
+                    <label for="imageInput" class="image-preview">
+                        <img id="preview"
+                             src="https://placehold.co/250x180?text=Select+Image"
+                             alt="Preview">
+                    </label>
+
+                    <input asp-for="ImageURL" type="file"
+                           id="imageInput"
+                           accept="image/*" hidden>
+
+                </div>
+                <br />
+                <input asp-for="Name" type="text" placeholder="Name and surname">
+                <textarea asp-for="Comment" placeholder="Comment"></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+        <div class="right">
+            <img src="~/ready-bootstrap-dashboard-master/assets/img/buta.png" />
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/testimonial.js"></script>
+
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            Swal.fire({
+            icon: 'success',
+            title: 'Şərhinizi aldıq. Təşəkkür edirik!',
+            text: '@TempData["Success"]',
+            confirmButtonText: 'OK'
+            });
+        </script>
+    }
+</body>
+</html>

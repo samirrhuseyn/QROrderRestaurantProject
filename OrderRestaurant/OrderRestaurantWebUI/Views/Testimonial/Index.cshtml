@@ -1,0 +1,54 @@
+﻿@model IPagedList<OrderRestaurantWebUI.Dtos.TestimonialDto.ResultTestimonialDto>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@{
+    ViewData["Title"] = "Testimonials";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<link href="~/ready-bootstrap-dashboard-master/assets/css/testimonialstyle.css" rel="stylesheet" />
+<div class="about-grid">
+    @foreach (var item in Model)
+    {
+        <div class="about-card">
+
+            <div class="about-header">
+                <div class="about-avatar">
+                    @if(item.ImageURL == "null")
+                    {
+                        <i class="la la-user"></i>
+                        
+                    }
+                    else
+                    {
+                        <img src="@item.ImageURL" />
+                    }
+                </div>
+                <div>
+                    <h3>@item.Name</h3>
+                    <span class="btn btn-primary">Active</span>
+                </div>
+
+                <div class="about-buttons">
+                    <a href="#" class="btn btn-primary"><i class="la la-pencil"></i></a>
+                    <a href="#" class="btn btn-danger"><i class="la la-trash"></i></a>
+                </div>
+            </div>
+
+            <p>
+                @item.Comment
+            </p>
+
+        </div>
+    }
+</div>
+<nav>
+    @Html.PagedListPager(
+    Model,
+    page => Url.Action("Index", new { page }),
+                    new PagedListRenderOptions
+                    {
+                        UlElementClasses = new[] { "pagination", "justify-content-center" },
+                        LiElementClasses = new[] { "page-item" },
+                        PageClasses = new[] { "page-link" }
+                    })
+</nav>
