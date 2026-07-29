@@ -1,4 +1,5 @@
 ﻿@model IPagedList<OrderRestaurantWebUI.Dtos.TestimonialDto.ResultTestimonialDto>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using X.PagedList
 @using X.PagedList.Mvc.Core
 @{
@@ -25,17 +26,34 @@
                 </div>
                 <div>
                     <h3>@item.Name</h3>
-                    <span class="btn btn-primary">Active</span>
+                    @if (item.IsActive == true)
+                    {
+                        <form asp-action="ChangeIsPassive" method="post">
+                            <input type="hidden" name="id" value="@item.TestimonialId" />
+                            <button style="margin-left:40px;" type="submit" class="btn btn-success btn-xs">
+                                Active
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="ChangeIsActive" method="post">
+                            <input type="hidden" name="id" value="@item.TestimonialId" />
+                            <button style="margin-left:40px;" type="submit" class="btn btn-danger btn-xs">
+                                Passive
+                            </button>
+                        </form>
+                    }
                 </div>
 
                 <div class="about-buttons">
-                    <a href="#" class="btn btn-primary"><i class="la la-pencil"></i></a>
-                    <a href="#" class="btn btn-danger"><i class="la la-trash"></i></a>
+                    <a href="/Testimonial/UpdateTestimonial/@item.TestimonialId" class="btn btn-primary"><i class="la la-pencil"></i></a>
+                    <a href="/Testimonial/DeleteTestimonial/@item.TestimonialId" class="btn btn-danger"><i class="la la-trash"></i></a>
                 </div>
             </div>
 
             <p>
-                @item.Comment
+                @Html.Raw(item.Comment)
             </p>
 
         </div>

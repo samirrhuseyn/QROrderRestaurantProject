@@ -1,0 +1,54 @@
+﻿@model OrderRestaurantWebUI.Dtos.TestimonialDto.UpdateTestimonialWithImageDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Update Testimonial";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="card">
+    <form method="post" enctype="multipart/form-data">
+        <div class="card-body col-md-12 pr-4 pl-4">
+            <div class="row">
+                <input asp-for="TestimonialId" hidden />
+                <input asp-for="ExistingImageUrl" hidden />
+                <div class="form-group col-md-6">
+                    <label for="squareInput1">Name</label>
+                    <input asp-for="Name" type="text" id="squareInput1" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+
+                    <label for="squareInput1">Image</label>
+
+                    <input asp-for="ImageURL" type="file" id="imageInput" class="form-control">
+                    <img id="imagePreview"
+                         src="@Model.ExistingImageUrl"
+                         class="h-50 w-50"
+                         alt="Preview" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="wordEditor">Comment</label>
+                    <textarea asp-for="Comment" id="editor"></textarea>
+                </div>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-start">
+                <button class="btn btn-success">Save</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<script>
+    document.getElementById("imageInput").addEventListener("change", function (e) {
+
+        const file = e.target.files[0];
+
+        if (file) {
+            document.getElementById("imagePreview").src = URL.createObjectURL(file);
+        }
+
+    });
+</script>

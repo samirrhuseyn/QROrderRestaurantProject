@@ -1,0 +1,63 @@
+.user-item {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 20px;
+}
+
+.status-btn {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 22px;
+	cursor: pointer;
+}
+.username-input {
+	width: 450px;
+	height: 50px;
+	border-radius: 12px;
+	padding: 0 15px;
+	font-size: 18px;
+	outline: none;
+}
+
+	.username-input:focus {
+		box-shadow: none;
+	}
+
+.btn-danger {
+	width: 52px;
+	height: 42px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+}
+
+.btn-primary {
+	width: 52px;
+	height: 42px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+}
+
+.btn-dark {
+	width: 52px;
+	height: 42px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+}
+
+.divider {
+	width: 3px;
+	height: 55px;
+	background: #000;
+	margin: 0 8px;
+}

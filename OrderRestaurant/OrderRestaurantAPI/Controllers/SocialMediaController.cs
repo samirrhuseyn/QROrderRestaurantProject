@@ -29,7 +29,7 @@ namespace OrderRestaurantAPI.Controllers
         {
             SocialMedia socialMedia = new SocialMedia()
             {
-                Title = createSocialMediaDto.Title,
+                Color = createSocialMediaDto.Color,
                 Icon = createSocialMediaDto.Icon,
                 URL = createSocialMediaDto.URL
             };
@@ -37,7 +37,7 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Created successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteSocialMedia(int id)
         {
             var value = _socialMediaService.TGetById(id);
@@ -51,7 +51,7 @@ namespace OrderRestaurantAPI.Controllers
             SocialMedia socialMedia = new SocialMedia()
             {
                 SocialMediaId = updateSocialMediaDto.SocialMediaId,
-                Title = updateSocialMediaDto.Title,
+                Color = updateSocialMediaDto.Color,
                 Icon = updateSocialMediaDto.Icon,
                 URL = updateSocialMediaDto.URL
             };
@@ -59,7 +59,7 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Updated successfully!");
         }
 
-        [HttpGet("GetSocialMedia")]
+        [HttpGet("{id}")]
         public IActionResult GetSocialMedia(int id)
         {
             var value = _socialMediaService.TGetById(id);

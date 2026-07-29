@@ -38,7 +38,7 @@ namespace OrderRestaurantAPI.Controllers
             return Ok("Created successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteTestimonial(int id)
         {
             var value = _testimonialService.TGetById(id);
@@ -54,17 +54,36 @@ namespace OrderRestaurantAPI.Controllers
                 TestimonialId = updateTestimonialDto.TestimonialId,
                 Name = updateTestimonialDto.Name,
                 Comment = updateTestimonialDto.Comment,
-                IsActive = true
+                IsActive = true,
+                ImageURL = updateTestimonialDto.ImageURL
             };
             _testimonialService.TUpdate(testimonial);
             return Ok("Updated successfully!");
         }
 
-        [HttpGet("GetTestimonial")]
+        [HttpGet("{id}")]
         public IActionResult GetTestimonial(int id)
         {
             var value = _testimonialService.TGetById(id);
             return Ok(value);
+        }
+
+        [HttpPut("Passive{id}")]
+        public IActionResult ChangeIsPassive(int id)
+        {
+            var value = _testimonialService.TGetById(id);
+            value.IsActive = false;
+            _testimonialService.TUpdate(value);
+            return Ok("The situation has changed: Passive!");
+        }
+
+        [HttpPut("Active{id}")]
+        public IActionResult ChangeIsActive(int id)
+        {
+            var value = _testimonialService.TGetById(id);
+            value.IsActive = true;
+            _testimonialService.TUpdate(value);
+            return Ok("The situation has changed: Active!");
         }
     }
 }

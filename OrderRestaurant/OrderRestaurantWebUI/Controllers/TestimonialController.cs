@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using OrderRestaurantWebUI.Dtos.AboutDto;
 using OrderRestaurantWebUI.Dtos.ProductDtos;
 using OrderRestaurantWebUI.Dtos.TestimonialDto;
 using System.Text;
@@ -60,9 +61,100 @@ namespace OrderRestaurantWebUI.Controllers
             return View();
         }
 
+        public async Task<IActionResult> DeleteTestimonial(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"https://localhost:44382/api/Testimonial/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> UpdateTestimonial(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"https://localhost:44382/api/Testimonial/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var testimonial = JsonConvert.DeserializeObject<UpdateTestimonialDto>(jsonData);
+                var model = new UpdateTestimonialWithImageDto
+                {
+                    TestimonialId = testimonial.TestimonialId,
+                    Comment = testimonial.Comment,
+                    IsActive = testimonial.IsActive,
+                    Name = testimonial.Name,
+                    ExistingImageUrl = testimonial.ImageURL
+                };
+                return View(model);
+            }
+            return View();
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateTestimonial(UpdateTestimonialWithImageDto dto)
+        {
+            string imagePath = dto.ExistingImageUrl;
 
+            if (dto.ImageURL != null)
+            {
+                imagePath = await UploadImage(dto.ImageURL);
+            }
+
+            UpdateTestimonialDto updateDto = new()
+            {
+                Name = dto.Name,
+                Comment = dto.Comment,
+                IsActive = dto.IsActive,
+                TestimonialId = dto.TestimonialId,
+                ImageURL = imagePath
+            };
+
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(updateDto);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync("https://localhost:44382/api/Testimonial/", content);
+
+            if (response.IsSuccessStatusCode)
+                return RedirectToAction("Index");
+
+            return View(dto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeIsPassive(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            var responseMessage = await client.PutAsync($"https://localhost:44382/api/Testimonial/Passive{id}", null);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeIsActive(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            var responseMessage = await client.PutAsync($"https://localhost:44382/api/Testimonial/Active{id}", null);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
         private async Task<string> UploadImage(IFormFile image)
         {
             if (image == null || image.Length == 0)

@@ -1,0 +1,30 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model OrderRestaurantWebUI.Dtos.SocialMediaDto.CreateSocialMediaDto
+@{
+    ViewData["Title"] = "Create Social";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="card col-md-12">
+    <form method="post">
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="largeInput">Icon</label>
+                    <input asp-for="Icon" type="text" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="largeInput">Color</label>
+                    <input asp-for="Color" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="largeInput">URL</label>
+                <input asp-for="URL" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="card-action">
+            <button class="btn btn-success">Save</button>
+        </div>
+    </form>
+</div>

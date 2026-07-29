@@ -1,0 +1,30 @@
+﻿@model List<OrderRestaurantWebUI.Dtos.SocialMediaDto.ResultSocialMediaDto>
+@{
+    ViewData["Title"] = "Socials";
+    ViewData["Link"] = "/SocialMedia/CreateSocialMedia/";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<link href="~/ready-bootstrap-dashboard-master/assets/css/socialmediastyle.css" rel="stylesheet" />
+<div class="card">
+    @foreach(var item in Model)
+    {
+        <div class="user-item">
+            <span class="status-btn btn-@item.Color">
+                <i class="la la-@item.Icon"></i>
+            </span>
+            <input type="text" class="username-input" value="@item.URL" disabled>
+            <a href="/SocialMedia/UpdateSocialMedia/@item.SocialMediaId" class="btn btn-primary">
+                <i class="la la-pencil"></i>
+            </a>
+            <a href="/SocialMedia/DeleteSocialMedia/@item.SocialMediaId" class="btn btn-danger">
+                <i class="la la-trash"></i>
+            </a>
+            <div class="divider"></div>
+            <a href="@item.URL" class="btn btn-dark">
+                <i class="la la-share"></i>
+            </a>
+
+        </div>
+    }
+    
+</div>
