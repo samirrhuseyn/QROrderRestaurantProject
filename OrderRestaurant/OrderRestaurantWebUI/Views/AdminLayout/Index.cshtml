@@ -14,20 +14,18 @@
 
         <div class="main-panel">
             <div class="content">
-                <div class="container-fluid">
-                    <h4 class="page-title">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="page-title mb-0">
                         @ViewBag.Title
-                        @if(ViewBag.Link != null)
-                        {
-                            <a style="margin-left:1000px" href="@ViewBag.Link" class="btn btn-default">Create</a>
-                        }
-                        else
-                        {
-                            
-                        }
                     </h4>
-                    @RenderBody()
+
+                    @if (ViewBag.Link != null)
+                    {
+                        <a href="@ViewBag.Link" class="btn btn-default mb-3">Create</a>
+                    }
                 </div>
+
+                @RenderBody()
             </div>
 
             @await Component.InvokeAsync("_LayoutFooterComponentPartial")

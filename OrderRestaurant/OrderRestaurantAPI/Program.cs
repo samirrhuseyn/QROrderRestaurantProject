@@ -3,13 +3,32 @@ using OrderRestaurant.BusinessLayer.Concrete;
 using OrderRestaurant.DataAccessLayer.Abstract;
 using OrderRestaurant.DataAccessLayer.Concrete;
 using OrderRestaurant.DataAccessLayer.EntityFramework;
+using OrderRestaurantAPI.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder => 
+    {
+        builder
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .SetIsOriginAllowed((host) => true)
+            .AllowCredentials();
+            
+    });
+});
+
+builder.Services.AddSignalR();
 builder.Services.AddDbContext<OrderRestaurantContext>();
 // Bu kod layihədəki bütün Profile siniflərini avtomatik tapır və DI-a qeyd edir
 builder.Services.AddAutoMapper(cfg =>
 {
 }, typeof(Program).Assembly);
+
+
+
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 
@@ -47,11 +66,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();
