@@ -13,5 +13,23 @@ namespace OrderRestaurant.DataAccessLayer.EntityFramework
         public EfCategoryDal(OrderRestaurantContext context) : base(context)
         {
         }
+
+        public int ActiveCategoryCount()
+        {
+            using var context = new OrderRestaurantContext();
+            return context.Categories.Where(x => x.IsActive == true).Count();
+        }
+
+        public int CategoryCount()
+        {
+            using var context = new OrderRestaurantContext();
+            return context.Categories.Count();
+        }
+
+        public int PassiveCategoryCount()
+        {
+            using var context = new OrderRestaurantContext();
+            return context.Categories.Where(x => x.IsActive == false).Count();
+        }
     }
 }

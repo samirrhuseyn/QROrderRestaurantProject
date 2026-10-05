@@ -7,5 +7,6 @@ namespace OrderRestaurant.BusinessLayer.Abstract
 {
     public interface ICategoryService : IGenericService<Category>
     {
+        public int TCategoryCount();
     }
 }

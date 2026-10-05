@@ -16,6 +16,11 @@ namespace OrderRestaurant.BusinessLayer.Concrete
             _productDal = productDal;
         }
 
+        public int ProductCount()
+        {
+            return _productDal.ProductCount();
+        }
+
         public void TAdd(Product entity)
         {
             _productDal.Add(entity);
