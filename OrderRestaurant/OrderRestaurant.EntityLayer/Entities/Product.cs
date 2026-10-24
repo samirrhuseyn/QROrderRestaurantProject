@@ -1,4 +1,6 @@
-﻿namespace OrderRestaueant.EntityLayer.Entities
+﻿using OrderRestaurant.EntityLayer.Entities;
+
+namespace OrderRestaueant.EntityLayer.Entities
 {
     public class Product
     {
@@ -10,5 +12,7 @@
         public bool IsActive { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
+
     }
 }
